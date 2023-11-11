@@ -38,18 +38,29 @@
                                     <action selector="buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rRA-dt-u8d"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="8Wg-7Q-YS3">
+                                <rect key="frame" x="168" y="168" width="39" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="BRT-UW-rDJ"/>
+                                    <constraint firstAttribute="width" constant="39" id="EOf-J4-dBc"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NSp-6j-sOT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1jy-7I-Fkh"/>
                             <constraint firstItem="nhT-N4-k2e" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CbS-sX-ygl"/>
+                            <constraint firstItem="8Wg-7Q-YS3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="168" id="G91-gq-4o2"/>
                             <constraint firstItem="nhT-N4-k2e" firstAttribute="top" secondItem="NSp-6j-sOT" secondAttribute="bottom" constant="146" id="Kp9-9w-21s"/>
                             <constraint firstItem="NSp-6j-sOT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="PkE-6m-cN4"/>
+                            <constraint firstItem="8Wg-7Q-YS3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="148" id="QMG-ba-6h6"/>
                             <constraint firstItem="NSp-6j-sOT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dD2-Nk-vQC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8Wg-7Q-YS3" secondAttribute="trailing" constant="168" id="lk7-BE-6fq"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="8Wg-7Q-YS3" id="NSL-hm-gSL"/>
                         <outlet property="imageView" destination="NSp-6j-sOT" id="cwV-Ig-Rmf"/>
                     </connections>
                 </viewController>
