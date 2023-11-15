@@ -19,14 +19,16 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func buttonAction(_ sender: UIButton) {
-        getUrlPhoto()
-        getPhoto()
+        getUrlPhoto { urlImage in
+            self.getPhoto(url: urlImage)
+        }
+//        getPhoto()
     
         
         
     }
-    private func getUrlPhoto() {
-        URLSession.shared.dataTask(with: DogRandom.init().urlRandom) { data, response, error in
+    private func getUrlPhoto(completion: @escaping(String) -> Void) {
+        URLSession.shared.dataTask(with: URL(string: "https://dog.ceo/api/breeds/image/random")!) { data, _, error in
             guard let data = data else {
                 print(error?.localizedDescription ?? "No error description")
                 return
@@ -35,22 +37,18 @@ final class MainViewController: UIViewController {
             
             do {
                 let urlPhoto = try jsonDecoder.decode(GetUrlPhoto.self, from: data)
-                let newMessage = String(urlPhoto.message)
-                print(newMessage)
+                completion(urlPhoto.message)
             } catch let error {
                 print(error.localizedDescription)
             }
-//            print(GetUrlPhoto.init(message: newMessage, status: String))
-//            guard let urlPhoto = try jsonDecoder.decode(GetUrlPhoto.self, from: data) else {
-//                return
-//            }
-//            urlPhoto.message
         }.resume()
     }
     
     
-    private func getPhoto() {
-        URLSession.shared.dataTask(with: DogRandom.init().urlDogRandom) { data, response, error in
+    
+    private func getPhoto(url: String) {
+        guard let url = URL(string: url) else { return }
+        URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 print(error?.localizedDescription ?? "No error description")
                 return
