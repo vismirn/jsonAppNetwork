@@ -18,12 +18,10 @@ struct GetUrlPhoto: Decodable {
     let status: String
     
     static func getUrlRandom(from value: Any) -> String {
-        var str = ""
         guard let urlData = value as? [String: String] else { return "" }
 
         var getUrlPhoto = GetUrlPhoto.init(message: urlData["message"] ?? "", status: urlData["status"] ?? "")
         
-        str.append(getUrlPhoto.message)
-        return str
+        return getUrlPhoto.message
     }
 }

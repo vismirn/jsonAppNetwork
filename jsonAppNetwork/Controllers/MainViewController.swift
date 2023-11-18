@@ -51,7 +51,7 @@ final class MainViewController: UIViewController {
                 switch data.result {
                 case .success(let value):
                     let data = getPhoto(url: url)
-                    completion(.success(url))
+                    completion(.success(data))
                 case .failure(let error):
                     completion(.failure(error))
                 }
