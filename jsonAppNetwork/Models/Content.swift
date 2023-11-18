@@ -7,24 +7,6 @@
 
 import Foundation
 
-struct Content {
-    let name: String
-    let rotation_period: String
-    let orbital_period: String
-    let diameter: String
-    let climate: String
-    let gravity: String
-    let terrain: String
-    let surface_water: String
-    let population: String
-    let residents: [Any]
-    let films: [Any]
-    let created: String
-    let edited: String
-    let url: String
-    let urlNeed: String = "https://swapi.dev/api/planets/3/?format=json"
-}
-
 struct DogRandom {
     let urlRandom = URL(string: "https://dog.ceo/api/breeds/image/random")!
     let urlDogRandom = URL(string: "https://images.dog.ceo/breeds/saluki/n02091831_8847.jpg")!
@@ -34,4 +16,14 @@ struct DogRandom {
 struct GetUrlPhoto: Decodable {
     let message: String
     let status: String
+    
+    static func getUrlRandom(from value: Any) -> String {
+        var str = ""
+        guard let urlData = value as? [String: String] else { return "" }
+
+        var getUrlPhoto = GetUrlPhoto.init(message: urlData["message"] ?? "", status: urlData["status"] ?? "")
+        
+        str.append(getUrlPhoto.message)
+        return str
+    }
 }

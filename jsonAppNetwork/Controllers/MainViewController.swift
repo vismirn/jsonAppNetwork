@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import Alamofire
 
 final class MainViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    private let networkManager = NetworkManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +25,8 @@ final class MainViewController: UIViewController {
         getUrlPhoto { urlImage in
             self.getPhoto(url: urlImage)
         }
-//        getPhoto()
-    
-        
-        
     }
+    
     private func getUrlPhoto(completion: @escaping(String) -> Void) {
         URLSession.shared.dataTask(with: URL(string: "https://dog.ceo/api/breeds/image/random")!) { data, _, error in
             guard let data = data else {
@@ -44,7 +44,19 @@ final class MainViewController: UIViewController {
         }.resume()
     }
     
-    
+    private func getInfoFromAlomofire(url: String, completion: @escaping(String) -> Void) {
+        AF.request("https://dog.ceo/api/breeds/image/random")
+            .validate()
+            .responseJSON { data in
+                switch data.result {
+                case .success(let value):
+                    let data = getPhoto(url: url)
+                    completion(.success(url))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
     
     private func getPhoto(url: String) {
         guard let url = URL(string: url) else { return }
